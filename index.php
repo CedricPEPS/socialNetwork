@@ -5,7 +5,7 @@
 
     $loader = new Twig_Loader_Filesystem('templates'); // Dossier contenant les templates
 
-    $twig = new Twig_Environment($loader, array(
+    $twig = new Twig_Environment($loader, array(	//initialisation ou non(false) du cache
       'cache' => false
     ));
 
