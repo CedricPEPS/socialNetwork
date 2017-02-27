@@ -11,9 +11,9 @@
 		function log() {
 			extract($_POST);
 
-			Controller::loadClass('User');
+			Controller::loadClass('user');
 
-			$user = log::getUser($login);
+			$user = log::getUser($login, $password);
 
 			if ($user) {
 				$data = array(
