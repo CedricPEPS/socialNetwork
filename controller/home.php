@@ -8,17 +8,26 @@
 			return $data;
 		}
 
-		function log () {
+		function log() {
 			extract($_POST);
 
-			Controller::loadClass('log');
+			Controller::loadClass('User');
 
 			$user = log::getUser($login);
 
-			return $data = array(
-				'title' => "Profil $user",
-				'online' => 'true'
-			);
+			if ($user) {
+				$data = array(
+					'title' => "Profil $user",
+					'online' => true
+				);
+			} else {
+				//header('Location: '.WEBROOT.'home');
+				$data = array(
+					'online' => false
+				);
+			}
+
+			return $data;
 		}
 		
 	}
