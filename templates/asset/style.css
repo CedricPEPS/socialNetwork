@@ -1,0 +1,27 @@
+.btn {
+    margin-top: 1%;
+    background-color: darkorange;
+    color: #ffffff;
+}
+
+.btn:hover {
+    color: #ffffff;
+}
+
+.logon {
+    margin-top: 25%;
+    background-color: #EFEFEF;
+}
+
+.form-control {
+    margin-bottom: 1%;
+}
+
+.box-link {
+    margin: 2px;
+}
+
+.box-link p {
+    margin: 0;
+    padding: 0;
+}

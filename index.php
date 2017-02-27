@@ -1,20 +1,34 @@
 <?php
-	include_once('twig/lib/Twig/Autoloader.php');
 
-    Twig_Autoloader::register();
+require('vendor/autoload.php');
 
-    $loader = new Twig_Loader_Filesystem('templates'); // Dossier contenant les templates
+$loader = new Twig_Loader_Filesystem(__DIR__.'/templates');
+$twig = new Twig_Environment($loader, [
+	'cache' => false
+]);
 
-    $twig = new Twig_Environment($loader, array(	//initialisation ou non(false) du cache
-      'cache' => false
-    ));
+define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
+define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 
-	$tpl = $twig->loadTemplate('index.twig');
+require('core/controller.php');
+
+$params = explode('/', $_GET['p']);
+
+if (empty($params[0])) {
+	header('Location: home');
+}
+
+$controller = $params[0];
+$action = isset($params[1]) ? $params[1] : 'index';
+
+require('controller/'.$controller.'.php');
+$controller = new $controller();
+
+if (method_exists($controller, $action)) {
+	require('core/connect.class.php');
+	$data = $controller->$action();
 	
-	echo $tpl->render(array(
-        'title' => 'Twig example',
-		'exemple' => 'test',
-		'online' => 1
-    ));
-
-	
+	echo $twig->render($params[0].'.twig', $data);
+} else {
+	echo 'erreur 404';
+}
