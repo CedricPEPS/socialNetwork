@@ -7,7 +7,7 @@ $twig = new Twig_Environment($loader, [
 	'cache' => false
 ]);
 
-define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_FILENAME']));
+define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 
 require('core/controller.php');
