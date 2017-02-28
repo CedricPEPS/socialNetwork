@@ -18,14 +18,18 @@
 
 			$user = log::getUser($login, $password);
 
-			if ($user) {
+			// Set SESSION
+			$_SESSION['pseudo'] = $user['pseudo'];
+			$_SESSION['id'] 	= $user['id'];
+
+			if ($user['pseudo']) {
 				$data = array(
-					'title' => "Profil $user",
+					'title' => 'Profil '.$user['pseudo'].' ',
 					'asset' => ASSET,
-					'online' => true
+					'online' => true,
+					'test' => $_SESSION['id']
 				);
 			} else {
-				//header('Location: '.WEBROOT.'home');
 				$data = array(
 					'online' => false,
 					'asset' => ASSET
@@ -35,5 +39,5 @@
 			return $data;
 		}
 		
-		
+
 	}
