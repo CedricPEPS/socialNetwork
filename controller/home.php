@@ -26,32 +26,33 @@
 				$data = array(
 					'title' => 'Profil '.$user['pseudo'].' ',
 					'asset' => ASSET,
+					'root' => ROOT, 
 					'online' => true
 				);
 			} else {
 				$data = array(
 					'online' => false,
-					'asset' => ASSET
+					'root' => ROOT,
+					'asset' => ASSET,
+					'error' => 'Invalid login or password'
 				);
 			}
 
 			return $data;
 		}
 		
-		function createArticle(){
-
+		function createArticle() {
 			extract($_POST);
 
 			Controller::loadClass('articles');
 
-			$articles=articles::insert($content, $_SESSION["id"]);
-
+			$articles = articles::insert($content, $_SESSION["id"]);
 
 			$data = array(
-					'title' => 'Profil '.$_SESSION['pseudo'].' ',
-					'asset' => ASSET,
-					'online' => true
-				);
+				'title' => 'Profil '.$_SESSION['pseudo'].' ',
+				'asset' => ASSET,
+				'online' => true
+			);
 
 			return $data;
 		}
