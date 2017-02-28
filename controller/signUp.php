@@ -7,7 +7,8 @@
 		{
 			$data = array(
 				'title' => "SignUp",
-				'asset' => ASSET
+				'asset' => ASSET,
+				'root' => ROOT
 			);
 
 			return $data;
@@ -22,17 +23,17 @@
 			$mail = $_POST['mail'];
 			$password = $_POST['password'];
 
-			Controller::loadClass('signUpAccount');
+			Controller::loadClass('user');
 
-			$db = new signUpAccount($pseudo, $firstname, $lastname, $mail, $password);
-
-			$db->insertUser($pseudo, $firstname, $lastname, $mail, $password);
-
+			log::insertUser($pseudo, $firstname, $lastname, $mail, $password);
 
 			$data = array(
 				'title' => "SignUp",
-				'asset' => ASSET
+				'asset' => ASSET,
+				'root' => ROOT
 			);
+
+			return $data;
 		}
 		
 	}
