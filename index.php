@@ -26,6 +26,7 @@ $controller = new $controller();
 
 if (method_exists($controller, $action)) {
 	require('core/connect.class.php');
+	require('core/hash.class.php');
 	session_start();
 	$data = $controller->$action();
 
