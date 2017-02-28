@@ -4,7 +4,18 @@
 
 {% if online == true %}
 
-	<p> test </p>
+	<div class="container logon">
+		<div class="row">
+			<div class="col-xs-offset-1 col-xs-10 text-center">
+				<h2></h2>
+				<form method="post" action="wall/submit">
+					
+					<textearea type="text" class="form-control" name="message" value="" placeholder="message"></textearea>
+					<button type="submit" class="btn btn-lg"> Send Message </button>
+				</form>
+			</div>
+		</div>
+	</div>
 
 {% else %}
 
