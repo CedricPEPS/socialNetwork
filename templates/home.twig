@@ -10,12 +10,19 @@
 				<h2></h2>
 				<form method="post" action="createArticle">
 					
-					<textarea type="text" class="form-control" name="content" value="" placeholder="message"></textarea>
+					<textarea type="text" class="form-control" name="content" value="" placeholder="message" required></textarea>
 					<button type="submit" class="btn btn-lg"> Send Message </button>
 				</form>
 			</div>
 		</div>
 	</div>
+<ul>
+    {% for articles in articles %}
+        <li>{{ articles.content|e }}</li>
+    {% endfor %}
+</ul>
+
+
 
 {% else %}
 
