@@ -2,6 +2,18 @@
 
 	class log {
 
+		public static function insertUser ($pseudo, $firstname, $lastname, $mail, $password) 
+	    {    		
+	        $req = DataBase::bdd()->prepare('INSERT INTO users (pseudo, firstname, lastname, password, mail) VALUES (:pseudo, :firstname, :lastname, :password, :mail)');
+	         
+	      	$req->bindParam(":pseudo", $pseudo);
+	        $req->bindParam(":firstname", $firstname);
+	        $req->bindParam(":lastname", $lastname);
+	        $req->bindParam(":password", $password);
+	        $req->bindParam(":mail", $mail);
+	        $req->execute();
+		}
+
 		public static function getUser ($name, $password) {
 			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$name}' and password = '{$password}'");
 		    $fetch  = $query->fetch();
