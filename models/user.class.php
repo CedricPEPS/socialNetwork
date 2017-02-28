@@ -15,17 +15,29 @@
 		}
 
 		public static function getUser ($name, $password) {
-			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$name}' and password = '{$password}'");
-		    $fetch  = $query->fetch();
-		    $row    = $query->rowCount();
 
-		    $data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
 
-		    if ($row > 0) {
-		    	return $data; 
-		    } else {
-		    	return false;
-		    }
+		$query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$name}' ");
+		$fetch  = $query->fetch();
+		$row    = $query->rowCount();
+
+	
+
+		$hash = $fetch['password'];
+
+
+
+		$check = PassHash::check_password($hash, $password);
+
+		if($check == 1){
+
+		$data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
+		return $data;
+
+		 
+		} else {
+			return false;
 		}
+	}
 
 	}
