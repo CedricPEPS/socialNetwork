@@ -11,6 +11,20 @@
 	        $register->execute();
 
        }
+
+       public static function getArticles ($users_id) {
+			$query  = DataBase::bdd()->query("SELECT * FROM articles WHERE users_id = $users_id ORDER BY date DESC");
+		    $fetch  = $query->fetchAll();
+		    $row    = $query->rowCount();
+
+		    $data 	= $fetch;
+
+		    if ($row > 0) {
+		    	return $data; 
+		    } else {
+		    	return false;
+		    }
+		}
 	}
 
 ?>
