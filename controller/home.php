@@ -38,5 +38,21 @@
 			return $data;
 		}
 		
+		function createArticle(){
 
+			extract($_POST);
+
+			Controller::loadClass('articles');
+
+			$articles=articles::insert($content, $_SESSION["id"]);
+
+
+			$data = array(
+					'title' => 'Profil '.$_SESSION['pseudo'].' ',
+					'asset' => ASSET,
+					'online' => true
+				);
+
+			return $data;
+		}
 	}
