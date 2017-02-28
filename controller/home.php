@@ -26,8 +26,7 @@
 				$data = array(
 					'title' => 'Profil '.$user['pseudo'].' ',
 					'asset' => ASSET,
-					'online' => true,
-					'test' => $_SESSION['id']
+					'online' => true
 				);
 			} else {
 				$data = array(
