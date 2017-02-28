@@ -15,19 +15,24 @@
 			extract($_POST);
 
 			Controller::loadClass('user');
+			Controller::loadClass('articles');
+echo $_SESSION['pseudo'];
+			if (isset($_SESSION['pseudo'])) {
+				$articles = articles::getArticles($_SESSION["id"]);
+			} else {
+				$user = log::getUser($login, $password);
+				// Set SESSION
+				$_SESSION['pseudo'] = $user['pseudo'];
+				$_SESSION['id'] 	= $user['id'];
+			}
 
-			$user = log::getUser($login, $password);
-
-			// Set SESSION
-			$_SESSION['pseudo'] = $user['pseudo'];
-			$_SESSION['id'] 	= $user['id'];
-
-			if ($user['pseudo']) {
+			if ($_SESSION['pseudo']) {
 				$data = array(
-					'title' => 'Profil '.$user['pseudo'].' ',
+					'title' => 'Profil '.$_SESSION['pseudo'].' ',
 					'asset' => ASSET,
 					'root' => ROOT, 
-					'online' => true
+					'online' => true,
+					'articles' => $articles
 				);
 			} else {
 				$data = array(
@@ -48,12 +53,6 @@
 
 			$articles = articles::insert($content, $_SESSION["id"]);
 
-			$data = array(
-				'title' => 'Profil '.$_SESSION['pseudo'].' ',
-				'asset' => ASSET,
-				'online' => true
-			);
-
-			return $data;
+			header("Location: ".ROOT."home/log");
 		}
 	}
