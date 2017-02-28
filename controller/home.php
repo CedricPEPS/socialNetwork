@@ -3,7 +3,10 @@
 	class home extends Controller {
 
 		function index() {
-			$data = array('title' => "Home Social NetWork");
+			$data = array(
+				'title' => "Home Social NetWork",
+				'asset' => ASSET
+			);
 
 			return $data;
 		}
@@ -18,16 +21,19 @@
 			if ($user) {
 				$data = array(
 					'title' => "Profil $user",
+					'asset' => ASSET,
 					'online' => true
 				);
 			} else {
 				//header('Location: '.WEBROOT.'home');
 				$data = array(
-					'online' => false
+					'online' => false,
+					'asset' => ASSET
 				);
 			}
 
 			return $data;
 		}
+		
 		
 	}

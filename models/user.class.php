@@ -7,7 +7,13 @@
 		    $fetch  = $query->fetch();
 		    $row    = $query->rowCount();
 
-		    return ($row > 0) ? $fetch['pseudo'] : false;
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
+
+		    if ($row > 0) {
+		    	return $data; 
+		    } else {
+		    	return false;
+		    }
 		}
 
 	}
