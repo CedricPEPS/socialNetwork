@@ -5,7 +5,10 @@
 
 		function index() 
 		{
-			$data = array('title' => "Home Social NetWork");
+			$data = array(
+				'title' => "SignUp",
+				'asset' => ASSET
+			);
 
 			return $data;
 		}
@@ -24,7 +27,12 @@
 			$db = new signUpAccount($pseudo, $firstname, $lastname, $mail, $password);
 
 			$db->insertUser($pseudo, $firstname, $lastname, $mail, $password);
-	
+
+
+			$data = array(
+				'title' => "SignUp",
+				'asset' => ASSET
+			);
 		}
 		
 	}
