@@ -15,7 +15,9 @@
 </head>
 
 <body>
-
+{% if online == true %}
+    <a href="{{root}}home/disconnect">Deconnection</a>
+{% endif %}
     {% block content %} {% endblock %}
 
     <script>
