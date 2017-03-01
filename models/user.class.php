@@ -32,5 +32,18 @@
 			}
 		}
 
+		public static function getUserByPseudo ($pseudo) {
+			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$pseudo}'");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    $data 	= array('pseudo' => $fetch['pseudo']);
+
+		    if ($row > 0) {
+		    	return $data;
+		    } else {
+		    	return false;
+		    }
+		}
 
 	}
