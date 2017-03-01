@@ -25,17 +25,17 @@
 
 		$check = PassHash::check_password($hash, $password);
 
-		if($check == 1){
+			if($check == 1){
 
-		$data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
-		return $data;
+			$data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
+			return $data;
 
 		 
-		} else 
-		{
+			} else 
+			{
 
-			return false;
+				return false;
+			}
 		}
-	}
 
 	}
