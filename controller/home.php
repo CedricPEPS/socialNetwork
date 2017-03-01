@@ -16,7 +16,7 @@
 
 			Controller::loadClass('user');
 			Controller::loadClass('articles');
-echo $_SESSION['pseudo'];
+
 			if (isset($_SESSION['pseudo'])) {
 				$articles = articles::getArticles($_SESSION["id"]);
 			} else {
@@ -27,6 +27,7 @@ echo $_SESSION['pseudo'];
 			}
 
 			if ($_SESSION['pseudo']) {
+				$articles = articles::getArticles($_SESSION["id"]);
 				$data = array(
 					'title' => 'Profil '.$_SESSION['pseudo'].' ',
 					'asset' => ASSET,
@@ -54,5 +55,18 @@ echo $_SESSION['pseudo'];
 			$articles = articles::insert($content, $_SESSION["id"]);
 
 			header("Location: ".ROOT."home/log");
+		}
+
+		function disconnect()
+
+		{
+			session_destroy();
+			$data = array(
+				'title' => "Home Social NetWork",
+				'asset' => ASSET,
+				'root' => ROOT
+			);
+
+			return $data;
 		}
 	}
