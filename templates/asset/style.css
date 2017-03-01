@@ -25,12 +25,52 @@
     margin: 0;
     padding: 0;
 }
-textarea {
 
-    min-height: 40px;
-    max-height: 40px;
-    min-width: 280px;
-    max-width: 280px;
-    padding-bottom: 12px;
+.btn-search {
+    margin: 2px;
+    padding: 2px;
 }
 
+.search {
+    margin: 2px;
+    padding: 2px;
+}
+
+.btn-disconnect {
+    margin: 2px;
+    padding: 2px;
+}
+
+.btn-list {
+    margin: 2px;
+    padding: 2px;
+}
+
+.friend {
+    color: green;
+}
+
+.count {
+    position: absolute;
+    top: 25px;
+    left: 30px;
+    height: 20px;
+    width: 20px;
+    color: white;
+    text-align: center;
+    border: 1px solid green;
+    border-radius: 100%;
+    background-color: green;
+}
+
+#articles {
+    padding-top: 10px;
+}
+
+textarea {
+    min-height: 40px;
+    max-height: 40px;
+    min-width: 200px;
+    max-width: 200px;
+    padding-bottom: 12px;
+}
