@@ -6,22 +6,21 @@
 
 	<div class="container logon">
 		<div class="row">
-			<div class="col-xs-offset-1 col-xs-10 text-center">
+			<div class="col-xs-offset-1 col-xs-9 text-center">
 				<h2></h2>
 				<form method="post" action="{{root}}home/createArticle">
-					
 					<textarea type="text" class="form-control" name="content" value="" placeholder="message" required></textarea>
-					<button type="submit" class="btn btn-lg"> Send Message </button>
 				</form>
+			</div>
+			<div class="col-xs-2">
+				<button type="submit" class="btn btn-small glyphicon glyphicon-share-alt"></button>
 			</div>
 		</div>
 	</div>
 
-    <div id = "articles" class="container">
+	 <div id = "articles" class="container">
     	<div class ="row">
-
     		{% for articles in articles %}
-        
         		<div class="col-xs-offset-1 col-xs-10 text-justify">{{ articles.content|e }} <br> Posté le {{ articles.date|date("d/m/Y")}} a {{ articles.date|date("H : i")}}<br><br></div>
         	{% endfor %}
     	</div>
@@ -40,8 +39,8 @@
 
 					<div class="row">
 						<div class="col-xs-offset-1 col-xs-10 text-left box-link">
-							<p><a href="signUp">Sign Up</a></p>
-							<p><a href="fPassword">Lost password</a></p>
+							<p><a href="{{root}}signUp">Sign Up</a></p>
+							<p><a href="{{root}}fPassword">Lost password</a></p>
 						</div>
 					</div>
 
