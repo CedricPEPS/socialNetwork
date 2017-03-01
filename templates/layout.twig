@@ -16,6 +16,40 @@
 
 <body>
 
+{% if online == true %}
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3 search">
+                <form method="post" action="{{root}}friend/search">
+                    <input type="text" class="form-control search" name="pseudo" value="">
+            </div>
+            <div class="col-xs-2 btn-search">
+                    <button type="submit" class="btn btn-small glyphicon glyphicon-search"></button>
+                 </form>
+            </div>
+            <div class="col-xs-2 btn-list">
+                <form method="post" action="{{root}}home">
+                    <button type="submit" class="btn btn-small glyphicon glyphicon-list"> </button>
+                </form>
+                {% if notification %}
+                    <div class="count"> {{ notification }} </div>
+                {% endif %}
+            </div>
+            <div class="col-xs-2 btn-disconnect">
+                <form method="post" action="{{root}}profile">
+                    <button type="submit" class="btn btn-small glyphicon glyphicon-user"> </button>
+                </form>
+            </div>
+            <div class="col-xs-2 btn-disconnect">
+                <form method="post" action="{{root}}home/disconnect">
+                    <button type="submit" class="btn btn-small glyphicon glyphicon-off"> </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+
     {% block content %} {% endblock %}
 
     <script>
