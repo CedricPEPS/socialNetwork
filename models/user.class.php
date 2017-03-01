@@ -21,11 +21,7 @@
 		$fetch  = $query->fetch();
 		$row    = $query->rowCount();
 
-	
-
 		$hash = $fetch['password'];
-
-
 
 		$check = PassHash::check_password($hash, $password);
 
@@ -35,7 +31,9 @@
 		return $data;
 
 		 
-		} else {
+		} else 
+		{
+
 			return false;
 		}
 	}
