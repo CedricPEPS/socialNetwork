@@ -1,4 +1,4 @@
-.btn {
+..btn {
     margin-top: 1%;
     background-color: darkorange;
     color: #ffffff;
@@ -73,4 +73,10 @@ textarea {
     min-width: 200px;
     max-width: 200px;
     padding-bottom: 12px;
+}
+
+#articleContent {
+    background-color : #EFEFEF;
+    margin-top : 12px;
+    padding-top : 12px;
 }
