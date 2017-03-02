@@ -84,11 +84,14 @@
 		}
 
 		public static function updateNotif($id) {
-			$update = DataBase::bdd()->query("UPDATE notifications SET action = 0 WHERE id = '{$id}'");
+			$update = DataBase::bdd()->query("UPDATE notifications SET action = '0' WHERE id = '{$id}'");
 		}
 
 		public static function addFriend($user_id, $friend_id) {
-			$req = DataBase::bdd()->prepare('INSERT INTO friend(user_id, friend_id) VALUES (:user_id, :friend_id)');
+			$req = DataBase::bdd()->prepare('INSERT INTO friends(user_id, friend_id) VALUES (:user_id, :friend_id)');
+			$req->bindParam(":user_id", $user_id);
+	        $req->bindParam(":friend_id", $friend_id);
+	        
 	        $req->execute();
 		}
 
