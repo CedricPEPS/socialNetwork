@@ -94,5 +94,28 @@
 	        
 	        $req->execute();
 		}
+		
+		public static function getLogin ($pseudo, $mail) {
+		    $query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$pseudo}' and mail = '{$mail}'");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    if ($row > 0) {
+		    	return true; 
+		    } else {
+		    	return false;
+		    }
+		}
+
+		public static function setNewPassword($password, $pseudo){
+
+			$password = PassHash::hash($password);
+
+			$req = DataBase::bdd()->prepare("UPDATE users SET password = '{$password}' WHERE pseudo = '{$pseudo}'");
+
+			$req->bindParam(":password", $password);
+			$req->execute();
+
+		}
 
 	}
