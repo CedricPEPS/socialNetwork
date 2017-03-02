@@ -25,7 +25,9 @@
 				$data = array(
 					'title' => "Home Social NetWork",
 					'asset' => ASSET,
-					'root' => ROOT
+					'root' => ROOT,
+					'error' => 'Invalid login or password',
+					'title' => "Home Social NetWork"
 				);
 			}
 			return $data;
