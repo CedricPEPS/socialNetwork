@@ -26,28 +26,24 @@
     padding: 0;
 }
 
-.btn-search {
-    margin: 2px;
-    padding: 2px;
-}
-
 .search {
     margin: 2px;
     padding: 2px;
 }
 
-.btn-disconnect {
-    margin: 2px;
-    padding: 2px;
-}
-
-.btn-list {
+.btn-custom {
     margin: 2px;
     padding: 2px;
 }
 
 .friend {
     color: green;
+}
+
+.bar {
+    margin-top: 10px;
+    margin-right: 10px;
+    padding: 0;
 }
 
 .count {
