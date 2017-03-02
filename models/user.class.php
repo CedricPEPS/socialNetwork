@@ -37,13 +37,59 @@
 		    $fetch  = $query->fetch();
 		    $row    = $query->rowCount();
 
-		    $data 	= array('pseudo' => $fetch['pseudo']);
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
 
 		    if ($row > 0) {
 		    	return $data;
 		    } else {
 		    	return false;
 		    }
+		}
+
+		public static function getUserById ($id) {
+			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE id = '{$id}'");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'id' => $fetch['id']);
+
+		    if ($row > 0) {
+		    	return $data;
+		    } else {
+		    	return false;
+		    }
+		}
+
+		public static function setNotifAddUser($user_id, $friend_id, $action) {
+			$req = DataBase::bdd()->prepare('INSERT INTO notifications(user_id, friend_id, action) VALUES (:user_id, :friend_id, :action)');
+
+	      	$req->bindParam(":user_id", $user_id);
+	        $req->bindParam(":friend_id", $friend_id);
+	        $req->bindParam(":action", $action);
+	        $req->execute();
+		}
+
+		public static function getNotifByUserId($user_id) {
+			$query  = DataBase::bdd()->query("SELECT * FROM notifications WHERE friend_id = '{$user_id}' and action = 1");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    $data 	= array('friend_id' => $fetch['user_id'], 'action' => $fetch['action'], 'row' => $row, 'id' => $fetch['id']);
+
+		    if ($row > 0) {
+		    	return $data;
+		    } else {
+		    	return false;
+		    }
+		}
+
+		public static function updateNotif($id) {
+			$update = DataBase::bdd()->query("UPDATE notifications SET action = 0 WHERE id = '{$id}'");
+		}
+
+		public static function addFriend($user_id, $friend_id) {
+			$req = DataBase::bdd()->prepare('INSERT INTO friend(user_id, friend_id) VALUES (:user_id, :friend_id)');
+	        $req->execute();
 		}
 
 	}
