@@ -76,7 +76,7 @@
 		function accept() {
 			Controller::loadClass('user');
 
-			log::updateNotif($_POST['notificationId'])
+			log::updateNotif($_POST['notificationId']);
 
 			log::addFriend($_SESSION['id'], $_POST['friend_id']);
 
@@ -93,9 +93,9 @@
 		function refuse() {
 			Controller::loadClass('user');
 
-			log::updateNotif($_POST['notificationId'])
+			log::updateNotif($_POST['notificationId']);
 
-			
+
 
 			$data = array(
 				'title' => 'Add Friend',
