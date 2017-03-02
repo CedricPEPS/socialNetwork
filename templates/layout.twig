@@ -28,11 +28,15 @@
                  </form>
             </div>
             <div class="col-xs-2 btn-list">
-                <form method="post" action="{{root}}home">
-                    <button type="submit" class="btn btn-small glyphicon glyphicon-list"> </button>
+                <form method="post" action="{{root}}friend">
+                    {% if notifications %}
+                        <input type="text" name="notificationId" value="{{notificationId}}" hidden="hidden">
+                        <input type="text" name="friendId" value="{{friendId}}" hidden="hidden">
+                    {% endif %}
+                        <button type="submit" class="btn btn-small glyphicon glyphicon-list"> </button>
                 </form>
-                {% if notification %}
-                    <div class="count"> {{ notification }} </div>
+                {% if notifications %}
+                    <div class="count"> {{ notifications }} </div>
                 {% endif %}
             </div>
             <div class="col-xs-2 btn-disconnect">
