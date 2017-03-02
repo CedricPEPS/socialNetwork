@@ -5,15 +5,21 @@
 		function index() {
 			if (isset($_SESSION['pseudo'])) {
 				Controller::loadClass('articles');
-				
+				Controller::loadClass('user');
+
+				$notifications = log::getNotifByUserId($_SESSION['id']);				
 				$articles = articles::getArticles($_SESSION["id"]);
 
 				$data = array(
 					'title' => "Home Social NetWork",
 					'asset' => ASSET,
 					'online' => true,
-					'root' => ROOT, 
-					'articles' => $articles
+					'root' => ROOT,
+					'home' => true,
+					'articles' => $articles,
+					'notifications' => $notifications['row'],
+					'friendId' => $notifications['friend_id'],
+					'notificationId' => $notifications['id']
 				);
 			} else {
 				$data = array(
@@ -40,12 +46,18 @@
 
 			if ($_SESSION['pseudo']) {
 				$articles = articles::getArticles($_SESSION["id"]);
+				$notifications = log::getNotifByUserId($_SESSION['id']);
+
 				$data = array(
 					'title' => 'Profil '.$_SESSION['pseudo'].' ',
 					'asset' => ASSET,
 					'root' => ROOT,
 					'articles' => $articles,
-					'online' => true
+					'home' => true,
+					'online' => true,
+					'notifications' => $notifications['row'],
+					'friendId' => $notifications['friend_id'],
+					'notificationId' => $notifications['id']
 				);
 			} else {
 				$data = array(
@@ -64,21 +76,6 @@
 
 			$articles = articles::insert($_POST['content'], $_SESSION["id"]);
 			header("Location: ".ROOT."home");
-		}
-
-		function search() {
-			Controller::loadClass('user');
-
-			$find = log::getUserByPseudo($_POST['pseudo']);
-
-			$data = array(
-				'title' => 'Profil '.$_SESSION['pseudo'].' ',
-				'asset' => ASSET,
-				'root' => ROOT, 
-				'online' => true
-			);
-
-			return $data;
 		}
 
 		function disconnect() {
