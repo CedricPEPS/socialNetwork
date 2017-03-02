@@ -3,22 +3,36 @@
 	class friend {
 
 		function index() {
-			$notificationId = $_POST['notificationId'];
 
-			$friendId = $_POST['friendId'];
+			if (isset($_POST['notificationId'])) {
+				$notificationId = $_POST['notificationId'];
 
-			Controller::loadClass('user');
+				$friendId = $_POST['friendId'];
 
-			$userAsk = log::getUserById($friendId);
+				Controller::loadClass('user');
 
-			$data = array(
-				'title' => 'Add Friend',
-				'asset' => ASSET,
-				'root' => ROOT, 
-				'online' => true,
-				'userAsk' => $userAsk['pseudo'],
-				'notificationId' => $notificationId
-			);
+				$userAsk = log::getUserById($friendId);
+
+				$data = array(
+					'title' => 'Add Friend',
+					'asset' => ASSET,
+					'root' => ROOT, 
+					'online' => true,
+					'userAsk' => $userAsk['pseudo'],
+					'friendId' => $friendId,
+					'notificationId' => $notificationId
+				);
+			} else {
+				$list = 'list of friend(s)';
+
+				$data = array(
+					'title' => 'Add Friend',
+					'asset' => ASSET,
+					'root' => ROOT, 
+					'online' => true,
+					'list' => $list
+				);
+			}
 
 			return $data;
 		}
@@ -38,6 +52,7 @@
 				'asset' => ASSET,
 				'root' => ROOT, 
 				'online' => true,
+				'search' => true,
 				'send' => true
 			);
 
@@ -78,13 +93,15 @@
 
 			log::updateNotif($_POST['notificationId']);
 
-			log::addFriend($_SESSION['id'], $_POST['friend_id']);
+			log::addFriend($_SESSION['id'], $_POST['friendId']);
 
 			$data = array(
 				'title' => 'Add Friend',
 				'asset' => ASSET,
 				'root' => ROOT, 
-				'online' => true
+				'online' => true,
+				'add' => true,
+				'pseudo' => $_POST['pseudo']
 			);
 
 			return $data;
