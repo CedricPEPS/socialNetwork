@@ -70,5 +70,35 @@
         crossorigin="anonymous">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#pseudo").keyup(function() {
+            var pseudo = $("#pseudo").val();
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "http://localhost/projects/socialNetwork/ajax/validate",
+                data: 'pseudo='+pseudo,
+                success: function(msg)
+                {
+                    msg = JSON.parse(msg);
+                    console.log(msg.validate);
+
+                    if(msg.validate === false)
+                    {
+                        $("#pseudo").removeClass(" alert-success");
+                        $("#pseudo").addClass(" alert-danger");
+                    }
+                    else
+                    {
+                        $("#pseudo").removeClass(" alert-danger");
+                        $("#pseudo").addClass(" alert-success"); 
+                    }
+                }
+            }); 
+        });
+    });
+</script>
 </body>
 </html>
