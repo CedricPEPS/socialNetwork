@@ -88,34 +88,54 @@
 		}
 
 		public static function addFriend($user_id, $friend_id) {
-			$req = DataBase::bdd()->prepare('INSERT INTO friends(user_id, friend_id) VALUES (:user_id, :friend_id)');
-			$req->bindParam(":user_id", $user_id);
-	        $req->bindParam(":friend_id", $friend_id);
-	        
-	        $req->execute();
+			$query  = DataBase::bdd()->query("SELECT * FROM friends WHERE friend_id = '{$friend_id}' and user_id = '{$user_id}'");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    if ($row > 0) {
+		    	return false;
+		    } else {
+
+				$req = DataBase::bdd()->prepare('INSERT INTO friends(user_id, friend_id) VALUES (:user_id, :friend_id)');
+				$req->bindParam(":user_id", $user_id);
+		        $req->bindParam(":friend_id", $friend_id);
+		        
+		        $req->execute();
+
+		        return true;
+		    }
 		}
-		
+
+		public static function getListFriend($user_id) {
+			$query  = DataBase::bdd()->query("SELECT friend_id FROM friends WHERE user_id = '{$user_id}'");
+		    $fetch  = $query->fetchAll();
+		    $row    = $query->rowCount();
+
+		    $data 	= array('user' => $fetch);
+
+		    if ($row > 0) {
+		    	return $data;
+		    } else {
+		    	return false;
+		    }
+		}
+
 		public static function getLogin ($pseudo, $mail) {
 		    $query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo = '{$pseudo}' and mail = '{$mail}'");
 		    $fetch  = $query->fetch();
 		    $row    = $query->rowCount();
-
 		    if ($row > 0) {
 		    	return true; 
 		    } else {
 		    	return false;
 		    }
 		}
-
+		
 		public static function setNewPassword($password, $pseudo){
-
 			$password = PassHash::hash($password);
-
 			$req = DataBase::bdd()->prepare("UPDATE users SET password = '{$password}' WHERE pseudo = '{$pseudo}'");
-
 			$req->bindParam(":password", $password);
 			$req->execute();
-
 		}
 
 	}
