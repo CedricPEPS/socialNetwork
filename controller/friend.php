@@ -80,26 +80,75 @@
 		function search() {
 			Controller::loadClass('user');
 
-			$find = log::getUserByPseudo($_POST['pseudo']);
+			if ($_SESSION['pseudo'] == $_POST['pseudo']) {
 
-			if ($find != false) {
 				$data = array(
 					'title' => 'Add Friend',
 					'asset' => ASSET,
 					'root' => ROOT, 
 					'online' => true,
-					'friend' => $find['pseudo'],
-					'search' => true
+					'myself' => true
 				);
 			} else {
-				$data = array(
-					'title' => 'Add Friend',
-					'asset' => ASSET,
-					'root' => ROOT, 
-					'online' => true,
-					'pseudo' => $_POST['pseudo'],
-					'search' => false
-				);
+
+				$find = log::getUserByPseudo($_POST['pseudo']);
+
+				if ($find != false) {
+					$listId = log::getListFriend($_SESSION['id']);
+
+
+					if (count($listId["friend"]) > 0) {
+						$i = 0;
+
+						while ($i < count($listId["friend"])) {
+							if ($listId["friend"][$i]["friend_id"] == $_SESSION['id']) {
+								$list[] = ["list" => log::getUserById($listId["friend"][$i]['user_id'])];
+							} else {
+								$list[] = ["list" => log::getUserById($listId["friend"][$i]['friend_id'])];
+							}
+
+							if ($_POST['pseudo'] == $list[$i]['list']['pseudo']) {
+								$alreadyFriend = true;
+								$add = true;
+							} else {
+								$alreadyFriend = false;
+								$add = false;
+							}
+
+							$i++;
+						}
+
+						$data = array(
+							'title' => 'Add Friend',
+							'asset' => ASSET,
+							'root' => ROOT, 
+							'online' => true,
+							'friend' => $find['pseudo'],
+							'pseudo' => $_POST['pseudo'],
+							'search' => true,
+							'add' => $add,
+							'alreadyFriend' => $alreadyFriend
+						);
+					} else {
+						$data = array(
+							'title' => 'Add Friend',
+							'asset' => ASSET,
+							'root' => ROOT, 
+							'online' => true,
+							'friend' => $find['pseudo'],
+							'search' => true
+						);
+					}
+				} else {
+					$data = array(
+						'title' => 'Add Friend',
+						'asset' => ASSET,
+						'root' => ROOT, 
+						'online' => true,
+						'pseudo' => $_POST['pseudo'],
+						'search' => false
+					);
+				}
 			}
 
 			return $data;
