@@ -2,33 +2,48 @@
 
 {% block content %}
 
-<div>
-	<h1>Profile</h1>
-</div>
-
-
-<div id="nav" class="container">
-	<div class="col-xs-offset-1 col-xs-8 bar">
-	<img src="./images/avatar-5.jpg" class="img-responsive" alt="Cinque Terre">
+<div id="nav" class="container logon col-xs-offset-2 col-xs-8">
+	<div class="row text center">
+	
+		
+		<div>{{firstname}} {{lastname}}</div>
+		<br>
+		<div class=" col-xs-4 text center">
+	
+		<img src="./images/avatar-5.jpg" class="img-responsive" alt="Cinque Terre">
+		
 		<form method="post" action="{{root}}profile/newAvatar" enctype="multipart/form-data">	
 			<input type="file" name="avatar" accept="/images/*">	
 			<button type="submit" class="btn btn-lg"> Insert Image </button>
 			<span>{{error}}</span>
 		</form>
-	</div>
+
+		<p> Pseudo </p>
+			
+			<form method="post" action="{{root}}profile/newPseudo">	
+				<input type="login" name="pseudo" class="small input" value="" placeholder="{{pseudo}}"><br>	
+				<button type="submit" class="btn btn-xs"> Modify </button>
+			</form>
+		<br>
+		<p> Mail </p>
+
+			<form method="post" action="{{root}}profile/newMail">	
+				<input type="email" class="small input" name="mail" value="" placeholder="{{mail}}">
+				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden"><br>	
+				<button type="submit" class=" btn btn-xs"> Modify </button>
+			</form>
+			<br>
+			<p> Password </p>  
+			<form method="post" action="{{root}}fPassword/newPassword">
+                                                          
+				<input type="password" class="small input" name="password" value="" placeholder="Password"></br>
+				<input type="password" class="small input" name="confPassword" value="" placeholder="Confirm Password">
+				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden"><br>	
+				<button type="submit" class="btn btn-xs"> Modifiy </button>
+		
+			</form>
+		</div>	
+	</div>	
 </div>
-<div id="nav" class="container">
-	<div class="col-xs-offset-1 col-xs-8 bar">
-		<form method="post" action="{{root}}profile/newMail">	
-			<input type="email" class="form-control" name="mail" value="" placeholder="Email">
-			<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden">	
-			<button type="submit" class="btn btn-lg"> Modify </button>
-		</form>
-	</div>
-</div>
-
-
-
-
 
 {% endblock %}
