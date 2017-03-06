@@ -145,5 +145,13 @@
 			$req->execute();
 
 		}
+		public static function setNewAvatar($avatar, $pseudo){
+
+			$updateAvatar = DataBase::bdd()->prepare("UPDATE users SET photo = '{$avatar}' WHERE pseudo = '{$pseudo}'");
+			$updateAvatar->execute(array(
+						'avatar' 	=> $_SESSION['id'].".".$extensionUpload,
+						'id'		=> $_SESSION['id']
+						));
+		}
 
 	}
