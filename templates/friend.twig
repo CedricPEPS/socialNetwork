@@ -2,88 +2,96 @@
 
 {% block content %}
 
-{% if lists %}
-	<p> list :
-		<ul>
-		    {% for list in lists %}
-		        <li><a href="wall/{{ list.list.pseudo }}"> {{ list.list.pseudo }} </a></li>
-		    {% endfor %}
-		</ul>
-	</p>
+{% if myself %}
+	<p> You have not friend ? Sorry for you but you can't add yourself ! </p>
 
 {% else %}
 
-	{% if add %}
-		{% if error %}
+	{% if lists %}
 
-			<p> You are already friend with {{pseudo}} </p>
+		<p> list :
+			<ul>
+			    {% for list in lists %}
+			        <li><a href="wall/profile/{{ list.list.pseudo }}"> {{ list.list.pseudo }} </a></li>
+			    {% endfor %}
+			</ul>
+		</p>
 
-		{% else %}
+	{% else %}
 
-			<p> You have add <span class="friend"> {{pseudo}} </span> ! </p>
+		{% if add %}
+			{% if error or alreadyFriend %}
 
-		{% endif %}
+				<p> You are already friend with {{pseudo}} </p>
 
-	{% elseif userAsk %}
+			{% else %}
 
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-offset-1 col-xs-10">
-					<p> L'user <span class="friend"> {{userAsk}} </span> ask you for to become your friend !</p>
-					<p> What do you want ? </p>
+				<p> You have add <span class="friend"> {{pseudo}} </span> ! </p>
+
+			{% endif %}
+
+		{% elseif userAsk %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-offset-1 col-xs-10">
+						<p> L'user <span class="friend"> {{userAsk}} </span> ask you for to become your friend !</p>
+						<p> What do you want ? </p>
+					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-xs-offset-2 col-xs-4">
-					<form method="post" action="{{root}}friend/accept">
-						<input type="text" name="notificationId" value="{{ notificationId }}" hidden="hidden">
-						<input type="text" name="friendId" value="{{ friendId }}" hidden="hidden">
-						<input type="text" name="pseudo" value="{{userAsk}}" hidden="hidden">
-						<button type="submit" class="btn btn-lg glyphicon glyphicon-ok"> </button>
-					</form>
-				</div>
+				<div class="row">
 					<div class="col-xs-offset-2 col-xs-4">
-					<form method="post" action="{{root}}friend/refuse">
-						<input type="text" name="notificationId" value="{{ notificationId }}" hidden="hidden">
-						<button type="submit" class="btn btn-lg glyphicon glyphicon-remove"> </button>
-					</form>
-				</div>
-			</div>
-		</div>
-
-	{% elseif search == false %}
-
-		<p> User <span class="friend"> {{pseudo}} </span> not found </p>
-
-	{% elseif send == true %}
-
-		<p> request send </p>
-
-	{% elseif search == true %}
-
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-offset-1 col-xs-10">
-					<div> 
-						<p> Do you want to send friend request at <span class="friend"> {{ friend }} </span> ? </p>
+						<form method="post" action="{{root}}friend/accept">
+							<input type="text" name="notificationId" value="{{ notificationId }}" hidden="hidden">
+							<input type="text" name="friendId" value="{{ friendId }}" hidden="hidden">
+							<input type="text" name="pseudo" value="{{userAsk}}" hidden="hidden">
+							<button type="submit" class="btn btn-lg glyphicon glyphicon-ok"> </button>
+						</form>
+					</div>
+						<div class="col-xs-offset-2 col-xs-4">
+						<form method="post" action="{{root}}friend/refuse">
+							<input type="text" name="notificationId" value="{{ notificationId }}" hidden="hidden">
+							<button type="submit" class="btn btn-lg glyphicon glyphicon-remove"> </button>
+						</form>
 					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-xs-offset-2 col-xs-4">
-					<form method="post" action="{{root}}friend/send">
-						<input type="text" name="pseudo" value="{{ friend }}" hidden="hidden">
-						<button type="submit" class="btn btn-lg glyphicon glyphicon-ok"> </button>
-					</form>
+
+		{% elseif search == false %}
+
+			<p> User <span class="friend"> {{pseudo}} </span> not found </p>
+
+		{% elseif send == true %}
+
+			<p> request send </p>
+
+		{% elseif search == true %}
+
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-offset-1 col-xs-10">
+						<div> 
+							<p> Do you want to send friend request at <span class="friend"> {{ friend }} </span> ? </p>
+						</div>
+					</div>
 				</div>
+				<div class="row">
 					<div class="col-xs-offset-2 col-xs-4">
-					<form method="post" action="{{root}}home">
-						<button type="submit" class="btn btn-lg glyphicon glyphicon-remove"> </button>
-					</form>
+						<form method="post" action="{{root}}friend/send">
+							<input type="text" name="pseudo" value="{{ friend }}" hidden="hidden">
+							<button type="submit" class="btn btn-lg glyphicon glyphicon-ok"> </button>
+						</form>
+					</div>
+						<div class="col-xs-offset-2 col-xs-4">
+						<form method="post" action="{{root}}home">
+							<button type="submit" class="btn btn-lg glyphicon glyphicon-remove"> </button>
+						</form>
+					</div>
 				</div>
 			</div>
-		</div>
+
+		{% endif %}
 
 	{% endif %}
 
