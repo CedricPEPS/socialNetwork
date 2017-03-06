@@ -10,6 +10,7 @@
 
     <!-- Theme CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
     <link href="{{asset}}/style.css" rel="stylesheet">
 
 </head>
@@ -70,35 +71,7 @@
         crossorigin="anonymous">
     </script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#pseudo").keyup(function() {
-            var pseudo = $("#pseudo").val();
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
 
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url: "http://localhost/projects/socialNetwork/ajax/validate",
-                data: 'pseudo='+pseudo,
-                success: function(msg)
-                {
-                    msg = JSON.parse(msg);
-                    console.log(msg.validate);
-
-                    if(msg.validate === false)
-                    {
-                        $("#pseudo").removeClass(" alert-success");
-                        $("#pseudo").addClass(" alert-danger");
-                    }
-                    else
-                    {
-                        $("#pseudo").removeClass(" alert-danger");
-                        $("#pseudo").addClass(" alert-success"); 
-                    }
-                }
-            }); 
-        });
-    });
-</script>
 </body>
 </html>

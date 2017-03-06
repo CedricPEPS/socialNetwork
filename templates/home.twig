@@ -12,19 +12,21 @@
 					<textarea type="text" class="form-control" name="content" value="" placeholder="message" required></textarea>
 			</div>
 			<div class="col-xs-2">
-				<button type="submit" class="btn btn-small glyphicon glyphicon-share-alt"></button>
+				<button type="submit" id="submit" class="btn btn-small glyphicon glyphicon-share-alt"></button>
 				</form>
 			</div>
 		</div>
 	</div>
 
-	 <div id = "articles" class="container">
+{% for article in articles %}
+	<div class="container article">
     	<div class ="row">
-    		{% for articles in articles %}
-        		<div class="col-xs-offset-1 col-xs-10 text-justify">{{ articles.content|e }} <br> Posté le {{ articles.date|date("d/m/Y")}} a {{ articles.date|date("H : i")}}<br><br></div>
-        	{% endfor %}
+        	<div class="col-xs-offset-1 col-xs-10 text-justify">{{ article.content|e }} <br> 
+        		<div class="publish"> {{ article.date}} </div>
+        	</div>
     	</div>
     </div>
+{% endfor %}
 
 {% else %}
 

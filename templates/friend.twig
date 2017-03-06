@@ -2,15 +2,27 @@
 
 {% block content %}
 
-{% if list %}
-
-	<p> list : </p>
+{% if lists %}
+	<p> list :
+		<ul>
+		    {% for list in lists %}
+		        <li><a href="wall"> {{ list.pseudo }} </a></li>
+		    {% endfor %}
+		</ul>
+	</p>
 
 {% else %}
 
 	{% if add %}
+		{% if error %}
 
-		<p> You have add <span class="friend"> {{pseudo}} </span> ! </p>
+			<p> You are already friend with {{pseudo}} </p>
+
+		{% else %}
+
+			<p> You have add <span class="friend"> {{pseudo}} </span> ! </p>
+
+		{% endif %}
 
 	{% elseif userAsk %}
 
