@@ -107,11 +107,11 @@
 		}
 
 		public static function getListFriend($user_id) {
-			$query  = DataBase::bdd()->query("SELECT friend_id FROM friends WHERE user_id = '{$user_id}'");
+			$query  = DataBase::bdd()->query("SELECT friend_id, user_id FROM friends WHERE user_id = '{$user_id}' OR friend_id = '{$user_id}'");
 		    $fetch  = $query->fetchAll();
 		    $row    = $query->rowCount();
 
-		    $data 	= array('user' => $fetch);
+		    $data 	= array('friend' => $fetch);
 
 		    if ($row > 0) {
 		    	return $data;
@@ -130,13 +130,14 @@
 		    	return false;
 		    }
 		}
-		
+
 		public static function setNewPassword($password, $pseudo){
 			$password = PassHash::hash($password);
 			$req = DataBase::bdd()->prepare("UPDATE users SET password = '{$password}' WHERE pseudo = '{$pseudo}'");
 			$req->bindParam(":password", $password);
 			$req->execute();
 		}
+
 		public static function setNewMail($mail, $pseudo){
 
 			$req = DataBase::bdd()->prepare("UPDATE users SET mail = '{$mail}' WHERE pseudo = '{$pseudo}'");
