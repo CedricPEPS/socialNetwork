@@ -110,6 +110,7 @@
 							if ($_POST['pseudo'] == $list[$i]['list']['pseudo']) {
 								$alreadyFriend = true;
 								$add = true;
+								break;
 							} else {
 								$alreadyFriend = false;
 								$add = false;
