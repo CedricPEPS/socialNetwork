@@ -137,5 +137,13 @@
 			$req->bindParam(":password", $password);
 			$req->execute();
 		}
+		public static function setNewMail($mail, $pseudo){
+
+			$req = DataBase::bdd()->prepare("UPDATE users SET mail = '{$mail}' WHERE pseudo = '{$pseudo}'");
+
+			$req->bindParam(":mail", $mail);
+			$req->execute();
+
+		}
 
 	}
