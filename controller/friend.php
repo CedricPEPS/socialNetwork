@@ -23,14 +23,24 @@
 					'notificationId' => $notificationId
 				);
 			} else {
-				$list = 'list of friend(s)';
+				Controller::loadClass('user');
 
+				$listId = log::getListFriend($_SESSION['id']);
+
+				if ($listId["friend"][0]["friend_id"] == $_SESSION['id']) {
+					$list = ["pseudo" => log::getUserById($listId["friend"]['user_id'])];
+				} else {
+					$list = ["pseudo" => log::getUserById($listId["friend"]['friend_id'])];
+				}
+
+//				print_r($listId);
+				
 				$data = array(
 					'title' => 'Add Friend',
 					'asset' => ASSET,
 					'root' => ROOT, 
 					'online' => true,
-					'list' => $list
+					'lists' => $list
 				);
 			}
 
@@ -93,16 +103,28 @@
 
 			log::updateNotif($_POST['notificationId']);
 
-			log::addFriend($_SESSION['id'], $_POST['friendId']);
+			$addFriend = log::addFriend($_SESSION['id'], $_POST['friendId']);
 
-			$data = array(
-				'title' => 'Add Friend',
-				'asset' => ASSET,
-				'root' => ROOT, 
-				'online' => true,
-				'add' => true,
-				'pseudo' => $_POST['pseudo']
-			);
+			if ($addFriend) {
+				$data = array(
+					'title' => 'Add Friend',
+					'asset' => ASSET,
+					'root' => ROOT, 
+					'online' => true,
+					'add' => true,
+					'pseudo' => $_POST['pseudo']
+				);
+			} else {
+				$data = array(
+					'title' => 'Add Friend',
+					'asset' => ASSET,
+					'root' => ROOT, 
+					'online' => true,
+					'add' => true,
+					'pseudo' => $_POST['pseudo'],
+					'error' => true
+				);
+			}
 
 			return $data;
 		}
@@ -111,8 +133,6 @@
 			Controller::loadClass('user');
 
 			log::updateNotif($_POST['notificationId']);
-
-
 
 			$data = array(
 				'title' => 'Add Friend',
