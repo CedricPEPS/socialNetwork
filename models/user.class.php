@@ -153,5 +153,28 @@
 						'id'		=> $_SESSION['id']
 						));
 		}
+		public static function getUserInfo($id) {
+			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE id = '{$id}'");
+		    $fetch  = $query->fetch();
+		    $row    = $query->rowCount();
+
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'firstname' => $fetch['firstname'], 'lastname' => $fetch['lastname'], 'mail' => $fetch['mail']);
+
+		    if ($row > 0) {
+		    	return $data;
+		    } else {
+		    	return false;
+		    }
+		}
+
+		public static function setNewPseudo($pseudo, $id){
+			$req = DataBase::bdd()->prepare("UPDATE users SET pseudo = '{$pseudo}' WHERE id = '{$id}'");
+
+			$req->bindParam(":pseudo", $pseudo);
+			$req->execute();
+
+
+		}
+
 
 	}
