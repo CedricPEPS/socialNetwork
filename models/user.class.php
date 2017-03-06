@@ -4,9 +4,8 @@
 
 		public static function insertUser ($pseudo, $firstname, $lastname, $mail, $password) 
 	    {    		
-			$password = PassHash::hash($password);
 
-	        $req = DataBase::bdd()->prepare('INSERT INTO users (pseudo, firstname, lastname, password, mail) VALUES (:pseudo, :firstname, :lastname, :password, :mail)');
+		$req = DataBase::bdd()->prepare('INSERT INTO users (pseudo, firstname, lastname, password, mail) VALUES (:pseudo, :firstname, :lastname, :password, :mail)');
 
 	      	$req->bindParam(":pseudo", $pseudo);
 	        $req->bindParam(":firstname", $firstname);
