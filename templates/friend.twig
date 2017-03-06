@@ -6,7 +6,7 @@
 	<p> list :
 		<ul>
 		    {% for list in lists %}
-		        <li><a href="wall"> {{ list.pseudo }} </a></li>
+		        <li><a href="wall/{{ list.list.pseudo }}"> {{ list.list.pseudo }} </a></li>
 		    {% endfor %}
 		</ul>
 	</p>
