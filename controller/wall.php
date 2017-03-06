@@ -63,7 +63,6 @@
 				);
 			} else {
 				
-				
 				$data = array(
 					'title' => 'Wall '. $pseudo,
 					'asset' => ASSET,
