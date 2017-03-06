@@ -27,14 +27,22 @@
 
 				$listId = log::getListFriend($_SESSION['id']);
 
-				if ($listId["friend"][0]["friend_id"] == $_SESSION['id']) {
-					$list = ["pseudo" => log::getUserById($listId["friend"]['user_id'])];
-				} else {
-					$list = ["pseudo" => log::getUserById($listId["friend"]['friend_id'])];
+				$i = 0;
+
+				while ($i < count($listId["friend"]) && count($listId["friend"]) > 0) {
+					if ($listId["friend"][$i]["friend_id"] == $_SESSION['id']) {
+						$list[] = ["list" => log::getUserById($listId["friend"][$i]['user_id'])];
+					} else {
+						$list[] = ["list" => log::getUserById($listId["friend"][$i]['friend_id'])];
+					}
+
+					$i++;
 				}
 
-//				print_r($listId);
-				
+				if (empty($list)) {
+					$list = false;
+				}
+
 				$data = array(
 					'title' => 'Add Friend',
 					'asset' => ASSET,
