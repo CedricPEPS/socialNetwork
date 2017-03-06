@@ -10,9 +10,10 @@
 <div id="nav" class="container">
 	<div class="col-xs-offset-1 col-xs-8 bar">
 	<img src="./images/avatar-5.jpg" class="img-responsive" alt="Cinque Terre">
-		<form method="post" action="{{root}}profile" enctype="multipart/form-data">	
-			<input type="file" name="picture" accept="/images/*">	
+		<form method="post" action="{{root}}profile/newAvatar" enctype="multipart/form-data">	
+			<input type="file" name="avatar" accept="/images/*">	
 			<button type="submit" class="btn btn-lg"> Insert Image </button>
+			<span>{{error}}</span>
 		</form>
 	</div>
 </div>
