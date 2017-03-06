@@ -14,7 +14,8 @@
 
 				$i = 0;
 
-				while ($i <  count($articles)) {
+				while ($i < count($articles) && $articles != false) {
+
 					$articles[$i]['date'] = time_elapsed_string($articles[$i]['date']);
 
 					$i++;
@@ -47,7 +48,7 @@
 			
 			require('core/utils.php');
 
-			if (!isset($_SESSION['pseudo'])) {
+			if (!isset($_SESSION['pseudo']) && !empty($_POST['login']) && !empty($_POST['password'])) {
 				$user = log::getUser($_POST['login'], $_POST['password']);
 				
 				// Set SESSION
@@ -55,13 +56,14 @@
 				$_SESSION['id'] 	= $user['id'];
 			}
 
-			if ($_SESSION['pseudo']) {
+			if (!empty($_SESSION['pseudo'])) {
 				$articles = articles::getArticles($_SESSION["id"]);
 				$notifications = log::getNotifByUserId($_SESSION['id']);
 
 				$i = 0;
 
-				while ($i <  count($articles)) {
+				while ($i < count($articles) && $articles != false) {
+
 					$articles[$i]['date'] = time_elapsed_string($articles[$i]['date']);
 
 					$i++;
