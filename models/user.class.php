@@ -4,8 +4,7 @@
 
 		public static function insertUser ($pseudo, $firstname, $lastname, $mail, $password) 
 	    {    		
-
-		$req = DataBase::bdd()->prepare('INSERT INTO users (pseudo, firstname, lastname, password, mail) VALUES (:pseudo, :firstname, :lastname, :password, :mail)');
+	        $req = DataBase::bdd()->prepare('INSERT INTO users (pseudo, firstname, lastname, password, mail) VALUES (:pseudo, :firstname, :lastname, :password, :mail)');
 
 	      	$req->bindParam(":pseudo", $pseudo);
 	        $req->bindParam(":firstname", $firstname);
@@ -145,36 +144,36 @@
 			$req->execute();
 
 		}
-		public static function setNewAvatar($avatar, $pseudo){
 
+		public static function setNewAvatar($avatar, $pseudo){
 			$updateAvatar = DataBase::bdd()->prepare("UPDATE users SET photo = '{$avatar}' WHERE pseudo = '{$pseudo}'");
 			$updateAvatar->execute(array(
 						'avatar' 	=> $_SESSION['id'].".".$extensionUpload,
 						'id'		=> $_SESSION['id']
 						));
 		}
+
 		public static function getUserInfo($id) {
 			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE id = '{$id}'");
 		    $fetch  = $query->fetch();
 		    $row    = $query->rowCount();
-
-		    $data 	= array('pseudo' => $fetch['pseudo'], 'firstname' => $fetch['firstname'], 'avatar' => $fetch['photo'], 'lastname' => $fetch['lastname'], 'mail' => $fetch['mail']);
-
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'avatar' => $fetch['photo'], 'firstname' => $fetch['firstname'], 'lastname' => $fetch['lastname'], 'mail' => $fetch['mail']);
 		    if ($row > 0) {
 		    	return $data;
 		    } else {
 		    	return false;
 		    }
 		}
-
+		
 		public static function setNewPseudo($pseudo, $id){
 			$req = DataBase::bdd()->prepare("UPDATE users SET pseudo = '{$pseudo}' WHERE id = '{$id}'");
-
 			$req->bindParam(":pseudo", $pseudo);
 			$req->execute();
-
-
 		}
 
+		public static function updateAvatar($pseudo, $id, $extensionUpload){
+			$req = DataBase::bdd()->prepare("UPDATE users SET photo = '{$id}' WHERE pseudo = '{$pseudo}'");
+			$req->execute(array('id' => $id.".".$extensionUpload));
+		}
 
 	}
