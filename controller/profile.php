@@ -18,6 +18,7 @@ class profile extends Controller {
 				'mail' => $info['mail'],
 				'firstname' => $info['firstname'],
 				'lastname' => $info['lastname'],
+				'avatar' => $info['avatar'],
 				'notifications' => $notifications['row'],
 				'friendId' => $notifications['friend_id'],
 				'notificationId' => $notifications['id']
