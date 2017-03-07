@@ -39,7 +39,7 @@
 				}
 			}
 
-			if ($isFriend) {
+			if ($isFriend == 'true') {
 				$user = log::getUserByPseudo($pseudo);
 
 				$articles = articles::getArticles($user["id"]);
@@ -59,7 +59,8 @@
 					'root' => ROOT, 
 					'online' => true,
 					'articles' => $articles,
-					'pseudo' => $pseudo
+					'pseudo' => $pseudo,
+					'isFriend' => true
 				);
 			} else {
 				
@@ -68,8 +69,7 @@
 					'asset' => ASSET,
 					'root' => ROOT, 
 					'online' => true,
-					'articles' => $articles,
-					'pseudo' => $pseudo
+					'isFriend' => false
 				);
 			}
 		
