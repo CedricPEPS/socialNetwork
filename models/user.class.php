@@ -158,7 +158,7 @@
 		    $fetch  = $query->fetch();
 		    $row    = $query->rowCount();
 
-		    $data 	= array('pseudo' => $fetch['pseudo'], 'firstname' => $fetch['firstname'], 'lastname' => $fetch['lastname'], 'mail' => $fetch['mail']);
+		    $data 	= array('pseudo' => $fetch['pseudo'], 'firstname' => $fetch['firstname'], 'avatar' => $fetch['photo'], 'lastname' => $fetch['lastname'], 'mail' => $fetch['mail']);
 
 		    if ($row > 0) {
 		    	return $data;
