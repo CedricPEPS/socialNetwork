@@ -13,15 +13,14 @@ class profile extends Controller {
 				'asset' => ASSET,
 				'root' 	=> ROOT,
 				'online' => true,
-				'online' => true,
 				'pseudo'=> $_SESSION['pseudo'],
 				'mail' => $info['mail'],
 				'firstname' => $info['firstname'],
 				'lastname' => $info['lastname'],
-				'avatar' => $info['avatar'],
 				'notifications' => $notifications['row'],
 				'friendId' => $notifications['friend_id'],
-				'notificationId' => $notifications['id']
+				'notificationId' => $notifications['id'],
+				'avatar' => $info['avatar']
 		);
 
 		return $data;
@@ -48,12 +47,14 @@ class profile extends Controller {
 
 	function newAvatar(){
 		Controller::loadClass("user");
+		
 		if(isset($_FILES['avatar']) && !empty($_FILES['avatar']['name']))
 		{
 			$sizeMax 		= 2097152;
 			$validExtension = array('jpg', 'jpeg', 'png');
 			$pseudo			= $_SESSION['pseudo'];
 		}
+		
 		if($_FILES['avatar']['size'] <= $sizeMax)
 		{
 			$extensionUpload = strtolower(substr(strrchr($_FILES['avatar']['name'], '.'), 1));
@@ -67,11 +68,7 @@ class profile extends Controller {
 				
 				if($result)
 				{
-					$updateAvatar = DataBase::bdd()->prepare("UPDATE users SET photo = '{$avatar}' WHERE pseudo = '{$pseudo}'");
-					$updateAvatar->execute(array(
-						'avatar' 	=> $_SESSION['id'].".".$extensionUpload,
-						'id'		=> $_SESSION['id']
-						));
+					log::updateAvatar($_SESSION['pseudo'], $_SESSION['id'], $extensionUpload);
 										
 					$data = array(
 						'title' => 'Add avatar',
@@ -116,28 +113,31 @@ class profile extends Controller {
 	}
 
 	function newPassword() {
-			Controller::loadClass('user');
-			$pseudo = $_POST['pseudo'];
-			$password = $_POST['password'];
-			$confPasswordl = $_POST['confPassword'];
-			if (empty($password) && (empty($confPassword)) && $passord == $confPassword) {
-				$data = array(
-					'title' => 'Lost Password',
-					'asset' => ASSET,
-					'root' => ROOT,
-					'error' => 'the password are different'
-				);
-			} else {
-				log::setNewPassword($password, $pseudo);
-				header("Location: ".ROOT."home");
-				
-			}
-			return $data;
+		Controller::loadClass('user');
+			
+		$pseudo = $_POST['pseudo'];
+		$password = $_POST['password'];
+		$confPasswordl = $_POST['confPassword'];
+			
+		if (empty($password) && (empty($confPassword)) && $passord == $confPassword) {
+			$data = array(
+				'title' => 'Lost Password',
+				'asset' => ASSET,
+				'root' => ROOT,
+				'error' => 'the password are different'
+			);
+		} else {
+			log::setNewPassword($password, $pseudo);
+			header("Location: ".ROOT."home");
+		}
+		
+		return $data;
 	}
 	
 	function newPseudo() {
 		Controller::loadClass("user");
 		$pseudo = $_POST['pseudo'];
+		
 		log::setNewPseudo($pseudo, $_SESSION['id']);
 		$_SESSION['pseudo'] = $pseudo;
 			
