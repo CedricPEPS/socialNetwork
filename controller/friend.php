@@ -167,7 +167,7 @@
 				$data = array(
 					'title' => 'Add Friend',
 					'asset' => ASSET,
-					'root' => ROOT, 
+					'root' => ROOT,
 					'online' => true,
 					'add' => true,
 					'pseudo' => $_POST['pseudo']

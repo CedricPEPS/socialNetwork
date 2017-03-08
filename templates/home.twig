@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% if online == true %}
+{% if online %}
 
 	<div class="container logon">
 		<div class="row">
@@ -18,17 +18,20 @@
 		</div>
 	</div>
 
-{% if articles %}
-	{% for article in articles %}
-		<div class="container article">
-	    	<div class ="row">
-	        	<div class="col-xs-offset-1 col-xs-10 text-justify">{{ article.content|e }} <br> 
-	        		<div class="publish"> {{ article.date}} </div>
-	        	</div>
-	    	</div>
-	    </div>
-	{% endfor %}
-{% endif %}
+	{% if articles %}
+	    <div class="col-sm-7">  
+		    {% for article in articles %}
+		      <div class="row">
+		        <div class="col-sm-9">
+		          <div class="well articles">
+		            <p> {{ article.content|e }} </p>
+		            <p class="publish"> {{ article.date }} </p>
+		          </div>
+		        </div>
+		      </div>
+		    {% endfor %}
+   	 	</div>
+	{% endif %}
 
 {% endif %}
 

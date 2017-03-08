@@ -21,16 +21,12 @@
   <!--  Paper Dashboard core CSS    -->
   <link href="{{asset}}/css/paper-dashboard.css" rel="stylesheet"/>
 
-
-  <!--  CSS for Demo Purpose, don't include it in your project     -->
-  <link href="{{asset}}/css/demo.css" rel="stylesheet" />
-
   <!--  Fonts and icons     -->
   <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
   <link href="{{asset}}/css/themify-icons.css" rel="stylesheet">
  
-  <link href="{{asset}}/css/style.css" rel="stylesheet" />
+  <link href="{{asset}}/css/style.css" rel="stylesheet">
 
 </head>
 <body>
@@ -38,7 +34,6 @@
    {% if online %}
     <div class="wrapper">
         <div class="sidebar" data-background-color="white" data-active-color="danger">
-
 
           <div class="sidebar-wrapper">
             <div class="logo">
@@ -63,13 +58,13 @@
                 </li>
                <li class="">
                     <a href="{{root}}friend">
-                         <i class="ti-panel"></i>
+                        <i class="ti-view-list-alt"></i>
                         <p> Friend</p>
                     </a>
                 </li>
                  <li class="">
                     <a href="{{root}}home/disconnect">
-                        <i class="ti-panel"></i>
+                        <i class="ti-close"></i>
                         <p> Disconnect</p>
                     </a>
                 </li>
@@ -162,26 +157,7 @@
       <p><a href="#">Link</a></p> -->
     </div>
     
-    {% if home %}
-
-    <div class="col-sm-7">  
-    {% for article in articles %}
-      <div class="row">
-        <div class="col-sm-9">
-          <div class="well articles">
-            <p> {{ article.content|e }} </p>
-            <p class="publish"> {{ article.date }} </p>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-    </div>
-
-    {% else %}
-
     {% block content %} {% endblock %}
-
-    {% endif %}
 
   </div>
 </div>
@@ -251,35 +227,6 @@
 
 {% endif %}
 
-<script>
-   $(document).ready(function() {
-      $("#pseudo").keyup(function() {
-            var pseudo = $("#pseudo").val();
-            $.ajax({
-                cache: false,
-                type: "POST",
-                url: "http://localhost/socialNetwork/ajax/validate",
-                data: 'pseudo='+pseudo,
-                success: function(msg)
-                {
-                    msg = JSON.parse(msg);
-                    console.log(msg.validate);
-                    if(msg.validate === false)
-                    {
-                        $("#pseudo").removeClass(" alert-success");
-                        $("#pseudo").addClass(" alert-danger");
-                    }
-                    else
-                    {
-                        $("#pseudo").removeClass(" alert-danger");
-                        $("#pseudo").addClass(" alert-success"); 
-                    }
-                }
-            }); 
-        });
-    });
-</script>
-
     <footer class="footer">
         <div class="container-fluid">
             <nav class="pull-left">
@@ -322,19 +269,32 @@
 
 <!--  Google Maps Plugin    -->
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-
-<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
-<script src="{{asset}}/js/paper-dashboard.js"></script>
-
-<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
-<script src="{{asset}}/js/demo.js"></script>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-
-      demo.initChartist();
-
-  });
+<script>
+   $(document).ready(function() {
+      $("#pseudo").keyup(function() {
+            var pseudo = $("#pseudo").val();
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "http://localhost/socialNetwork/ajax/validate",
+                data: 'pseudo='+pseudo,
+                success: function(msg)
+                {
+                    msg = JSON.parse(msg);
+                    console.log(msg.validate);
+                    if(msg.validate === false)
+                    {
+                        $("#pseudo").removeClass(" alert-success");
+                        $("#pseudo").addClass(" alert-danger");
+                    }
+                    else
+                    {
+                        $("#pseudo").removeClass(" alert-danger");
+                        $("#pseudo").addClass(" alert-success"); 
+                    }
+                }
+            }); 
+        });
+    });
 </script>
-
 </html>

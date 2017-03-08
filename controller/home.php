@@ -4,13 +4,15 @@
 
 		function index() {
 			if (isset($_SESSION['pseudo'])) {
+				
 				Controller::loadClass('articles');
 				Controller::loadClass('user');
 
 				require('core/utils.php');
 
-				$notifications = log::getNotifByUserId($_SESSION['id']);				
+				$notifications = log::getNotifByUserId($_SESSION['id']);
 				$articles = articles::getArticles($_SESSION["id"]);
+				$info = log::getUserInfo($_SESSION['id']);
 
 				$i = 0;
 
@@ -30,15 +32,18 @@
 					'articles' => $articles,
 					'notifications' => $notifications['row'],
 					'friendId' => $notifications['friend_id'],
-					'notificationId' => $notifications['id']
+					'notificationId' => $notifications['id'],
+					'avatar' => $info['avatar']
 				);
 			} else {
+				
 				$data = array(
 					'title' => "Home Social NetWork",
 					'asset' => ASSET,
 					'root' => ROOT
 				);
 			}
+
 			return $data;
 		}
 
@@ -59,6 +64,7 @@
 			if (!empty($_SESSION['pseudo'])) {
 				$articles = articles::getArticles($_SESSION["id"]);
 				$notifications = log::getNotifByUserId($_SESSION['id']);
+				$info = log::getUserInfo($_SESSION['id']);
 
 				$i = 0;
 
@@ -78,7 +84,8 @@
 					'online' => true,
 					'notifications' => $notifications['row'],
 					'friendId' => $notifications['friend_id'],
-					'notificationId' => $notifications['id']
+					'notificationId' => $notifications['id'],
+					'avatar' => $info['avatar']
 				);
 			} else {
 				$data = array(

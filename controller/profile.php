@@ -74,6 +74,7 @@ class profile extends Controller {
 						'title' => 'Add avatar',
 						'asset' => ASSET,
 						'root' => ROOT,
+						'online' => true,
 						'error' => 'Loading the successful avatar' 
 					);
 					return $data;
@@ -83,7 +84,8 @@ class profile extends Controller {
 					$data = array(
 							'title' => 'Add Friend',
 							'asset' => ASSET,
-							'root' => ROOT, 
+							'root' => ROOT,
+							'online' => true,
 							'error' => "Error while uploading the image"
 						);
 					return $data;		
@@ -94,7 +96,8 @@ class profile extends Controller {
 				$data = array(
 							'title' => 'Add Friend',
 							'asset' => ASSET,
-							'root' => ROOT, 
+							'root' => ROOT,
+							'online' => true,
 							'error' => "The format of the image must be jpg, jpeg, png"
 						);
 				return $data;
@@ -106,6 +109,7 @@ class profile extends Controller {
 						'title' => 'Add Friend',
 						'asset' => ASSET,
 						'root' => ROOT, 
+						'online' => true,
 						'error' => "The size of the image should not exceed 2Mo"
 					);
 			return $data;

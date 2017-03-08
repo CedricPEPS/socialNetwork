@@ -1,8 +1,6 @@
 <?php
-
 	class signUp extends Controller 
 	{
-
 		function index() 
 		{
 			$data = array(
@@ -10,10 +8,8 @@
 				'asset' => ASSET,
 				'root' 	=> ROOT
 			);
-
 			return $data;
 		}
-
 		function create () 
 		{
 		
@@ -23,7 +19,6 @@
 			$mail 			= $_POST['mail'];
 			$confPassword 	= $_POST['confPassword'];
 			$password 		= $_POST['password'];
-
 			$query  = DataBase::bdd()->query("SELECT * FROM users WHERE pseudo ='{$pseudo}'");
 			$fetch  = $query->fetch();
 			$row    = $query->rowCount();
@@ -33,26 +28,22 @@
 				if ($password === $confPassword) 
 				{
 					
-				$password = PassHash::hash($password);
-
-				Controller::loadClass('user');
-
-				log::insertUser($pseudo, $firstname, $lastname, $mail, $password);
-
-				$data = array(
-					'title' 	=> "Profile",
-					'asset' 	=> ASSET,
-					'root' 		=> ROOT,
-					'validate'	=> true
-				);
-
-				return $data;
-
+					$password = PassHash::hash($password);
+					
+					Controller::loadClass('user');
+					log::insertUser($pseudo, $firstname, $lastname, $mail, $password);
+					
+					$data = array(
+						'title' 	=> "Profile",
+						'asset' 	=> ASSET,
+						'root' 		=> ROOT,
+						'validate'	=> true
+					);
+					
+					return $data;
 				}
-
 				else 
 				{	
-
 					$data = array(
 						'title' 	=> "SignUp",
 						'asset' 	=> ASSET,
@@ -64,9 +55,8 @@
 						'pseudo'	=> $pseudo,
 						'mail'		=> $mail
 					);
-
+					
 					return $data;
-
 				}
 			}
 			else
@@ -82,9 +72,9 @@
 					'pseudo'	=> $pseudo,
 					'mail'		=> $mail
 					);
+				
 				return $data; 
 			}
 		}
 	}
-
 	?>

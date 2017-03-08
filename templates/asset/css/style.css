@@ -9,7 +9,12 @@ body {
 }
 
 .articles {
+	text-align: left;
     padding: 5px;
+}
+
+.well {
+	background-color: #ffffff;
 }
 
 .clearfix{*zoom:1;}.clearfix:before,.clearfix:after{display:table;content:"";line-height:0;}
