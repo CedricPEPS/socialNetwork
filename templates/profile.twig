@@ -3,47 +3,49 @@
 {% block content %}
 
 <div id="nav" class="container logon col-xs-offset-2 col-xs-8">
-	<div class="row text center">
+	<div class="row text-center">
 	
-		
 		<div>{{firstname}} {{lastname}}</div>
-		<br>
-		<div class=" col-xs-4 text center">
-	
-		<img src="templates/asset/images/avatars/{{avatar}}" class="img-responsive" alt="avatar">
-		
-		<form method="post" action="{{root}}profile/newAvatar" enctype="multipart/form-data">	
-			<input type="file" name="avatar" accept="/images/*">	
-			<button type="submit" class="btn btn-lg"> Insert Image </button>
-			<span>{{error}}</span>
-		</form>
 
-		<p> Pseudo </p>
+		<div class="col-xs-8 text-center">
+		
+		<span>{{error}}</span>
+
+		<div class="fileupload fileupload-new" data-provides="fileupload">
+			<form method="post" action="{{root}}profile/newAvatar" enctype="multipart/form-data">	
+			    <span class="btn btn-primary btn-file"><span class="fileupload-new">Select file</span>
+			    <span class="fileupload-exists">Change</span> <input type="file" name="avatar" accept="/images/*"/></span>
+			    <span class="fileupload-preview"></span>
+			    <a href="#" class="close fileupload-exists" data-dismiss="fileupload" style="float: none">×</a>
+			    <button type="submit" class="btn btn-small"> Insert Image </button>
+			</form>
+		</div>
+		   
+		<p class="text-left"> Pseudo </p>
 			
 			<form method="post" action="{{root}}profile/newPseudo">	
-				<input type="login" name="pseudo" class="small input" value="" placeholder="{{pseudo}}"><br>	
+				<input type="login" name="pseudo" class="small input" value="" placeholder="{{pseudo}}" required>	
 				<button type="submit" class="btn btn-xs"> Modify </button>
 			</form>
-		<br>
-		<p> Mail </p>
+
+		<p class="text-left"> Mail </p>
 
 			<form method="post" action="{{root}}profile/newMail">	
-				<input type="email" class="small input" name="mail" value="" placeholder="{{mail}}">
-				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden"><br>	
+				<input type="email" class="small input" name="mail" value="" placeholder="{{mail}}" required>
+				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden">
 				<button type="submit" class=" btn btn-xs"> Modify </button>
 			</form>
-			<br>
-			<p> Password </p>  
+			
+		<p class="text-left"> Password </p>
+
 			<form method="post" action="{{root}}fPassword/newPassword">
-                                                          
-				<input type="password" class="small input" name="password" value="" placeholder="Password"></br>
-				<input type="password" class="small input" name="confPassword" value="" placeholder="Confirm Password">
-				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden"><br>	
+				<input type="password" class="small input" name="password" value="" placeholder="Password" required>
+				<input type="password" class="small input" name="confPassword" value="" placeholder="Confirm Password" required>
+				<input type="text" name="pseudo" value="{{pseudo}}" hidden="hidden">
 				<button type="submit" class="btn btn-xs"> Modifiy </button>
-		
 			</form>
-		</div>	
-	</div>	
+		</div>
+	</div>
 </div>
 
 {% endblock %}

@@ -1,82 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
+  <meta charset="utf-8" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/img/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
 
-    <title> {{title}} </title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+  <meta name="viewport" content="width=device-width" />
 
-    <!-- Theme CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
-    <link href="{{asset}}/style.css" rel="stylesheet">
+
+  <!-- Bootstrap core CSS     -->
+  <link href="{{asset}}/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Animation library for notifications   -->
+  <link href="{{asset}}/css/animate.min.css" rel="stylesheet"/>
+
+  <!--  Paper Dashboard core CSS    -->
+  <link href="{{asset}}/css/paper-dashboard.css" rel="stylesheet"/>
+
+
+  <!--  CSS for Demo Purpose, don't include it in your project     -->
+  <link href="{{asset}}/css/demo.css" rel="stylesheet" />
+
+  <!--  Fonts and icons     -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+  <link href="{{asset}}/css/themify-icons.css" rel="stylesheet">
+ 
+  <link href="{{asset}}/css/style.css" rel="stylesheet" />
 
 </head>
-
 <body>
 
-{% if online == true %}
-    <div class="container">
-        <div class="row btn-custom">
-            <div class="col-xs-offset-1 col-xs-8 bar">
-                <form method="post" action="{{root}}friend/search">
-                    <input type="text" class="form-control search" name="pseudo" value="">
+   {% if online %}
+    <div class="wrapper">
+        <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+
+          <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    AcsNetwork
+                </a>
+
             </div>
-            <div class="col-xs-2 bar">
-                    <button type="submit" class="btn btn-small glyphicon glyphicon-search"></button>
-                 </form>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-offset-2 col-xs-2">
-                <form method="post" action="{{root}}home">
-                    <button type="submit" class="btn btn-small glyphicon glyphicon-home"> </button>
-                </form>
-            </div>
-            <div class="col-xs-2 btn-list">
-                <form method="post" action="{{root}}friend">
-                    {% if notifications %}
-                        <input type="text" name="notificationId" value="{{notificationId}}" hidden="hidden">
-                        <input type="text" name="friendId" value="{{friendId}}" hidden="hidden">
-                    {% endif %}
-                        <button type="submit" class="btn btn-small glyphicon glyphicon-list"> </button>
-                </form>
-                    {% if notifications %}
-                    
-                    <div class="count"> {{ notifications }} </div>
-                {% endif %}
-            </div>
-            <div class="col-xs-2">
-                <form method="post" action="{{root}}profile">
-                    <button type="submit" class="btn btn-small glyphicon glyphicon-user"> </button>
-                </form>
-            </div>
-            <div class="col-xs-2 btn-disconnect">
-                <form method="post" action="{{root}}home/disconnect">
-                    <button type="submit" class="btn btn-small glyphicon glyphicon-off"> </button>
-                </form>
-            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="{{root}}home">
+                        <i class="ti-panel"></i>
+                        <p> Home </p>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="{{root}}profile">
+                         <i class="ti-user"></i>
+                        <p> Profile</p>
+                    </a>
+                </li>
+               <li class="">
+                    <a href="{{root}}friend">
+                         <i class="ti-panel"></i>
+                        <p> Friend</p>
+                    </a>
+                </li>
+                 <li class="">
+                    <a href="{{root}}home/disconnect">
+                        <i class="ti-panel"></i>
+                        <p> Disconnect</p>
+                    </a>
+                </li>
+               
+            </ul>
         </div>
     </div>
 
-{% endif %}
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">AcsNetwork</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+              
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="ti-bell"></i>
+                            <p class="notification">5</p>
+                            <p>Notifications</p>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Notification 1</a></li>
+                            <li><a href="#">Notification 2</a></li>
+                            <li><a href="#">Notification 3</a></li>
+                            <li><a href="#">Notification 4</a></li>
+                            <li><a href="#">Another notification</a></li>
+                        </ul>
+                    </li>
+            
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+<!-- <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">Logo</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="{{root}}home">Home</a></li>
+        <li><a href="#">Notifications</a></li>
+      </ul>
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group input-group">
+          <input type="text" class="form-control" placeholder="Search..">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>        
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{{root}}profile"><span class="glyphicon glyphicon-user"></span> My Account</a></li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+  
+<div class="container text-center">    
+  <div class="row">
+    <div class="col-sm-3 well">
+      <div class="well">
+        <img src="templates/asset/images/avatars/{{avatar}}" class="img-circle" height="65" width="65" alt="Avatar">
+      </div>
+      <!-- <div class="alert alert-success fade in">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+        <p><strong>Ey!</strong></p>
+        People are looking at your profile. Find out who.
+      </div> -->
+     <!--  <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p>
+      <p><a href="#">Link</a></p> -->
+    </div>
+    
+    {% if home %}
+
+    <div class="col-sm-7">  
+    {% for article in articles %}
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="well articles">
+            <p> {{ article.content|e }} </p>
+            <p class="publish"> {{ article.date }} </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+
+    {% else %}
 
     {% block content %} {% endblock %}
 
-    <script
-        src="https://code.jquery.com/jquery-3.1.1.min.js"
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-        crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
-    <script>
-    $(document).ready(function() {
-        $("#pseudo").keyup(function() {
-            var pseudo = $("#pseudo").val();
+    {% endif %}
 
+  </div>
+</div>
+
+{% else %}
+ <div class="wrapper">
+        <div class="sidebar" data-background-color="white" data-active-color="danger">
+
+
+          <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                   login
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="{{root}}home">
+                        <i class="ti-panel"></i>
+                        <p> Home </p>
+                    </a>
+                </li>
+               
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar bar1"></span>
+                        <span class="icon-bar bar2"></span>
+                        <span class="icon-bar bar3"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">AcsNetwork</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+              
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="ti-bell"></i>
+                            <p class="notification">5</p>
+                            <p>Notifications</p>
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Notification 1</a></li>
+                            <li><a href="#">Notification 2</a></li>
+                            <li><a href="#">Notification 3</a></li>
+                            <li><a href="#">Notification 4</a></li>
+                            <li><a href="#">Another notification</a></li>
+                        </ul>
+                    </li>
+            
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+{% include 'sign.twig' %}
+
+{% endif %}
+
+<script>
+   $(document).ready(function() {
+      $("#pseudo").keyup(function() {
+            var pseudo = $("#pseudo").val();
             $.ajax({
                 cache: false,
                 type: "POST",
@@ -86,7 +264,6 @@
                 {
                     msg = JSON.parse(msg);
                     console.log(msg.validate);
-
                     if(msg.validate === false)
                     {
                         $("#pseudo").removeClass(" alert-success");
@@ -101,6 +278,63 @@
             }); 
         });
     });
-    </script>
+</script>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <nav class="pull-left">
+                <ul>
+
+                    <li>
+                     
+                    </li>
+                    <li>
+                  
+                 </li>
+                 <li>
+                   
+                </li>
+            </ul>
+        </nav>
+        <div class="copyright pull-right">
+      
+        </div>
+    </div>
+</footer>
+
+</div>
+</div>
+
 </body>
+
+<!--   Core JS Files   -->
+<script src="{{asset}}/js/jquery-1.10.2.js" type="text/javascript"></script>
+<script src="{{asset}}/js/bootstrap.min.js" type="text/javascript"></script>
+
+<!--  Checkbox, Radio & Switch Plugins -->
+<script src="{{asset}}/js/bootstrap-checkbox-radio.js"></script>
+
+<!--  Charts Plugin -->
+<script src="{{asset}}/js/chartist.min.js"></script>
+
+<!--  Notifications Plugin    -->
+<script src="{{asset}}/js/bootstrap-notify.js"></script>
+
+<!--  Google Maps Plugin    -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+
+<!-- Paper Dashboard Core javascript and methods for Demo purpose -->
+<script src="{{asset}}/js/paper-dashboard.js"></script>
+
+<!-- Paper Dashboard DEMO methods, don't include it in your project! -->
+<script src="{{asset}}/js/demo.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+      demo.initChartist();
+
+  });
+</script>
+
 </html>
