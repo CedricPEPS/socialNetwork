@@ -171,9 +171,9 @@
 			$req->execute();
 		}
 
-		public static function updateAvatar($pseudo, $id, $extensionUpload){
-			$req = DataBase::bdd()->prepare("UPDATE users SET photo = '{$id}' WHERE pseudo = '{$pseudo}'");
-			$req->execute(array('id' => $id.".".$extensionUpload));
+		public static function updateAvatar($pseudo, $avatar){
+			$req = DataBase::bdd()->prepare("UPDATE users SET photo = '{$avatar}' WHERE pseudo = '{$pseudo}'");
+			$req->execute();
 		}
 
 	}

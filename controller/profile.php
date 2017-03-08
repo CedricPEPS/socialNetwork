@@ -65,10 +65,10 @@ class profile extends Controller {
 				$cheminAvatar 	= "/images/avatars/".$_SESSION['id'].".".$extensionUpload;
 				$result 		= move_uploaded_file($_FILES['avatar']['tmp_name'], $asset.$cheminAvatar);
 				$avatar 		= $_SESSION['id'].".".$extensionUpload;
-				
+				echo $avatar;
 				if($result)
 				{
-					log::updateAvatar($_SESSION['pseudo'], $_SESSION['id'], $extensionUpload);
+					log::updateAvatar($_SESSION['pseudo'], $avatar);
 										
 					$data = array(
 						'title' => 'Add avatar',

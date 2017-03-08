@@ -24,7 +24,7 @@
 				}
 
 				$data = array(
-					'title' => 'Profil '.$_SESSION['pseudo'].'',
+					'title' => 'Welcome '.$_SESSION['pseudo'].'',
 					'asset' => ASSET,
 					'online' => true,
 					'root' => ROOT,
@@ -49,9 +49,6 @@
 
 		function log() {
 			Controller::loadClass('user');
-			Controller::loadClass('articles');
-			
-			require('core/utils.php');
 
 			if (!isset($_SESSION['pseudo']) && !empty($_POST['login']) && !empty($_POST['password'])) {
 				$user = log::getUser($_POST['login'], $_POST['password']);
@@ -62,31 +59,7 @@
 			}
 
 			if (!empty($_SESSION['pseudo'])) {
-				$articles = articles::getArticles($_SESSION["id"]);
-				$notifications = log::getNotifByUserId($_SESSION['id']);
-				$info = log::getUserInfo($_SESSION['id']);
-
-				$i = 0;
-
-				while ($i < count($articles) && $articles != false) {
-
-					$articles[$i]['date'] = time_elapsed_string($articles[$i]['date']);
-
-					$i++;
-				}
-
-				$data = array(
-					'title' => 'Profil '.$_SESSION['pseudo'].' ',
-					'asset' => ASSET,
-					'root' => ROOT,
-					'articles' => $articles,
-					'home' => true,
-					'online' => true,
-					'notifications' => $notifications['row'],
-					'friendId' => $notifications['friend_id'],
-					'notificationId' => $notifications['id'],
-					'avatar' => $info['avatar']
-				);
+				header("Location: ".ROOT."home");
 			} else {
 				$data = array(
 					'online' => false,
@@ -96,6 +69,7 @@
 					'title' => "Home Social NetWork"
 				);
 			}
+			
 			return $data;
 		}
 		
