@@ -7,6 +7,7 @@ $twig = new Twig_Environment($loader, [
 ]);
 $twig->getExtension('Twig_Extension_Core')->setTimezone('Europe/Paris');
 
+//define('ASSET', "http://89.90.212.142/socialNetwork/templates/asset");
 define('ASSET', "http://localhost/socialNetwork/templates/asset");
 define('WEBROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
 define('ROOT', str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
@@ -32,7 +33,7 @@ if (method_exists($controller, $action)) {
 	session_start();
 
 	$data = $controller->$action();
-	
+
 	if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
 		/* special ajax here */
 		$data = json_encode($data);
